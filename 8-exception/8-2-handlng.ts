@@ -1,6 +1,9 @@
+{class TimeoutError extends Error{}
+class OfflineError extends Error{}
+
 class NetworkClient {
   tryConnect(): void {
-    throw new Error("no network!");
+    throw new OfflineError("no network!");
   }
 }
 
@@ -18,6 +21,7 @@ class App {
   run() {
     try {
       this.userService.login();
+      //에러가 any타입임
     } catch (error) {
       //show dialog to user
     }
@@ -28,3 +32,4 @@ const client = new NetworkClient();
 const service = new UserService(client);
 const app = new App(service);
 app.run();
+}
